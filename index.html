@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kitchen Manager</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>🍳 Kitchen Manager</h1>
+    <button id="reset" class="link">Reset demo data</button>
+  </header>
+  <nav>
+    <button data-tab="dashboard">Dashboard <span id="badge" class="badge"></span></button>
+    <button data-tab="stock">Stock</button>
+    <button data-tab="recipes">Recipes</button>
+    <button data-tab="orders">Orders</button>
+    <button data-tab="guide">Staff guide</button>
+    <button data-tab="storage">Storage</button>
+  </nav>
+  <main id="view"></main>
+  <div id="toasts" aria-live="polite"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
