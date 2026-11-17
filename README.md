@@ -21,7 +21,7 @@ Orders are entered into the kitchen manually.
 1. Download or clone the repository.
 2. Open `index.html` in any modern browser.
 
-Or use the live version on GitHub Pages: `https://emelsena-22.github.io/kitchen-manager/`
+Or use the live version on GitHub Pages: https://emelsena-22.github.io/kitchen-manager/
 
 Data is saved in the browser's `localStorage`. Use **Reset demo data** to start over.
 
