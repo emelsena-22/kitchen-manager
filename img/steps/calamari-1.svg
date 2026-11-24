@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <rect width="640" height="360" fill="#fdf6ec"/>
+  <rect y="292" width="640" height="68" fill="#c8a27a"/>
+  <rect y="292" width="640" height="8" fill="#b08860"/>
+  <circle cx="44" cy="44" r="24" fill="#c2410c"/>
+  <text x="44" y="53" font-size="26" font-weight="700" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif">1</text>
+  <text x="320" y="170" font-size="110" text-anchor="middle">🧊</text>
+  <text x="320" y="228" font-size="20" text-anchor="middle" fill="#1f2328" font-family="system-ui, sans-serif"><tspan x="320" dy="0">Thaw the squid rings in the</tspan><tspan x="320" dy="26">refrigerator and pat them dry.</tspan></text>
+  <text x="320" y="334" font-size="16" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif">Fried calamari</text>
+</svg>
