@@ -1,4 +1,4 @@
-// Kitchen Management Program – draft
+// Kitchen Management Program – v1.0
 // Flow: purchase → stock → order (entered manually) → preparation (timed) → dish ready, stock deducted.
 
 const KEY = "kitchen-mgmt-v1";
@@ -277,6 +277,55 @@ const views = {
       </div>
     `;
   },
+  layout() {
+    const low = (k) => state.ingredients.filter((i) => i.storage === k && isLow(i)).length;
+    const count = (k) => state.ingredients.filter((i) => i.storage === k).length;
+    const zones = LAYOUT_ZONES.map((z) => {
+      const cx = z.x + z.w / 2, cy = z.y + z.h / 2;
+      const isStore = !!STORAGE_TYPES[z.id];
+      const sub = isStore ? `${count(z.id)} items · ${STORAGE_TYPES[z.id].temp}` : "";
+      const badge = z.step ? `<circle cx="${z.x + 22}" cy="${z.y + 22}" r="13" fill="#1f2328"/><text x="${z.x + 22}" y="${z.y + 27}" text-anchor="middle" font-size="14" font-weight="700" class="badge-t">${z.step}</text>` : "";
+      const alert = isStore && low(z.id) ? `<circle cx="${z.x + z.w - 22}" cy="${z.y + 22}" r="13" fill="var(--bad)"/><text x="${z.x + z.w - 22}" y="${z.y + 27}" text-anchor="middle" font-size="14" font-weight="700" class="badge-t">${low(z.id)}</text>` : "";
+      return `<g class="zone ${ui.zone === z.id ? "sel" : ""}" data-zone="${z.id}" tabindex="0" role="button" aria-label="${esc(z.label)}">
+        <rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="10" style="fill:${z.fill}"/>
+        <text x="${cx}" y="${cy - 8}" text-anchor="middle" font-size="30">${z.icon}</text>
+        <text x="${cx}" y="${cy + 20}" text-anchor="middle" font-size="17" font-weight="600">${esc(z.label)}</text>
+        ${sub ? `<text x="${cx}" y="${cy + 40}" text-anchor="middle" font-size="13" class="svg-muted">${sub}</text>` : ""}
+        ${badge}${alert}
+      </g>`;
+    }).join("");
+
+    const z = LAYOUT_ZONES.find((x) => x.id === ui.zone);
+    let info = `<p class="muted">Click an area to see what happens there.</p>`;
+    if (z) {
+      let extra = "";
+      if (STORAGE_TYPES[z.id]) {
+        const items = state.ingredients.filter((i) => i.storage === z.id);
+        extra = `<p class="muted">Temperature: ${STORAGE_TYPES[z.id].temp}</p><ul class="chips">${items.map((i) =>
+          `<li class="${isLow(i) ? "low" : ""}">${esc(i.name)} <span class="muted">${i.quantity} ${i.unit}</span></li>`).join("") || "<li class='muted'>Empty</li>"}</ul>`;
+      } else if (z.id === "cook") {
+        extra = `<ul class="chips">${state.recipes.map((r) => `<li>${esc(r.name)} <span class="muted">${r.prepMinutes} min planned</span></li>`).join("")}</ul>`;
+      }
+      info = `<h3>${z.icon} ${esc(z.label)}</h3><p>${esc(z.desc)}</p>${extra}`;
+    }
+
+    return `
+      <h2>Kitchen layout</h2>
+      <p class="muted">Plan of the kitchen. Numbers show the flow: <b>1</b> Receiving → <b>2</b> Storage → <b>3</b> Prep → <b>4</b> Cooking → <b>5</b> Pass → <b>6</b> Service; <b>7</b> dirty dishes return to Dishwashing. A red number on a storage area = low-stock items there.</p>
+      <div class="layout-wrap">
+        <svg viewBox="0 0 900 560" role="img" aria-label="Kitchen layout drawing">
+          <rect x="10" y="10" width="880" height="540" rx="6" class="wall"/>
+          <rect x="6" y="400" width="8" height="90" class="door"/>
+          <rect x="886" y="400" width="8" height="90" class="door"/>
+          <text x="20" y="452" font-size="14" text-anchor="middle">➜</text>
+          <text x="880" y="452" font-size="14" text-anchor="middle">➜</text>
+          ${zones}
+        </svg>
+      </div>
+      <div class="card zone-info">${info}</div>
+      <p class="muted">Legend: left door = deliveries in · right door = service exit.</p>
+    `;
+  },
 };
 
 const UPLOADED = "(uploaded photo)";
@@ -359,7 +408,7 @@ function stockLogTable(n) {
 }
 
 // ---------- UI state & rendering ----------
-const ui = { tab: "dashboard", guideRecipe: null, guideStep: 0, editRecipe: null };
+const ui = { tab: "dashboard", guideRecipe: null, guideStep: 0, editRecipe: null, zone: null };
 
 /** The step currently shown in the Staff guide. */
 function currentStep() {
@@ -445,6 +494,23 @@ document.addEventListener("submit", (e) => {
   }
   save();
 });
+
+// kitchen layout: click (or press Enter on) an area to see its details
+function pickZone(e) {
+  const g = e.target.closest("[data-zone]");
+  if (!g) return;
+  ui.zone = g.dataset.zone;
+  render();
+}
+document.addEventListener("click", pickZone);
+document.addEventListener("keydown", (e) => { if (e.key === "Enter") pickZone(e); });
+
+// survey link (set SURVEY_URL in js/data.js)
+if (SURVEY_URL) {
+  const s = $("#survey");
+  s.href = SURVEY_URL;
+  s.hidden = false;
+}
 
 // refresh running timers once a minute
 setInterval(() => { if (ui.tab === "orders") render(); }, 60000);

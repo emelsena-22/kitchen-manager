@@ -81,3 +81,21 @@ function freshState() {
   s.stockLog = s.ingredients.map((i) => ({ at: now, ingredientId: i.id, change: i.quantity, reason: "Initial purchase" }));
   return s;
 }
+
+// Link of the user-test survey (Google Forms). Leave empty to hide the link in the header.
+const SURVEY_URL = "";
+
+// Kitchen layout (drawn as SVG on the "Kitchen layout" screen). step = position in the kitchen flow.
+// Storage zones use the same ids as STORAGE_TYPES, so they list the ingredients stored there.
+const LAYOUT_ZONES = [
+  { id: "dry",     step: 2,    icon: "📦", label: "Dry storage",   x: 30,  y: 30,  w: 250, h: 130, fill: "var(--dry)",     desc: "Shelves for dry goods and vegetables that do not need cooling. Keep it dry, ventilated and off the floor." },
+  { id: "fridge",  step: 2,    icon: "🧊", label: "Refrigerator",  x: 290, y: 30,  w: 190, h: 130, fill: "var(--fridge)",  desc: "Fresh and chilled products. Keep raw and ready-to-eat foods on separate shelves." },
+  { id: "freezer", step: 2,    icon: "❄️", label: "Freezer",       x: 490, y: 30,  w: 190, h: 130, fill: "var(--freezer)", desc: "Frozen meat and other frozen goods. Thaw in the refrigerator, never at room temperature." },
+  { id: "dish",    step: 7,    icon: "🧼", label: "Dishwashing",   x: 700, y: 30,  w: 170, h: 130, fill: "#e5e7eb",        desc: "Dirty dishes return here from the pass and the cooking line. Clean dishes go back to the stations." },
+  { id: "prep",    step: 3,    icon: "🔪", label: "Prep area",     x: 30,  y: 190, w: 250, h: 140, fill: "#ecfccb",        desc: "Washing and cutting. Use separate boards for raw meat and vegetables. Ingredients are taken here from storage." },
+  { id: "cook",    step: 4,    icon: "🔥", label: "Cooking line",  x: 290, y: 190, w: 390, h: 140, fill: "#ffedd5",        desc: "Stove, oven and pans. Preparation time is measured from Start to Ready in the Orders screen." },
+  { id: "staff",   step: null, icon: "🧤", label: "Staff area",    x: 700, y: 190, w: 170, h: 140, fill: "#e5e7eb",        desc: "Hand-washing sink, lockers and notice board. New staff start here before entering the kitchen." },
+  { id: "receive", step: 1,    icon: "🚚", label: "Receiving",     x: 30,  y: 360, w: 250, h: 170, fill: "#fef9c3",        desc: "Delivery door. Check delivered goods, record them in Stock (Record a purchase), then move them to their storage area." },
+  { id: "pass",    step: 5,    icon: "🍽️", label: "Plating & pass", x: 290, y: 360, w: 390, h: 170, fill: "#fce7f3",       desc: "Dishes are plated and checked here before they leave the kitchen. Mark the order Ready when the dish is on the pass." },
+  { id: "service", step: 6,    icon: "🛎️", label: "Service area",  x: 700, y: 360, w: 170, h: 170, fill: "#e0e7ff",        desc: "Service exit. Finished dishes are picked up here." },
+];

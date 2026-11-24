@@ -75,10 +75,11 @@ with orders entered manually by kitchen staff.
 5. **Staff guide** – one step at a time with photo/video, step thumbnails, photo upload and video link
    per step, ingredient list with where to take each one from
 6. **Storage** – three areas with temperatures and their ingredients
+7. **Kitchen layout** – drawing of the kitchen with the flow Receiving → Storage → Prep → Cooking → Pass → Service (and Dishwashing). Click an area for its description; storage areas list their ingredients and show the number of low-stock items
 
-## 7. Technology choice (draft)
+## 7. Technology choice
 - HTML + CSS + JavaScript, no framework → opens in any browser, easy to host on **GitHub Pages**.
-- Data in browser `localStorage` (enough for a draft/demo).
+- Data in browser `localStorage` (enough for the pilot test; each device keeps its own data).
 - Next step: a backend + database so multiple devices share the same data.
 
 ## 8. Test scenarios
@@ -93,5 +94,7 @@ with orders entered manually by kitchen staff.
 | 7 | Staff guide → Upload photo on step 1 | Photo shown and kept after reload and after editing the recipe |
 | 8 | Staff guide → Video link with a YouTube URL | Video player shown for that step |
 | 9 | Dashboard with White cheese at 900 g (min 1000) | Listed with storage area, red badge |
+| 10 | Kitchen layout → click Refrigerator | Description and its ingredients shown; red "1" on the area for White cheese |
+| 11 | Kitchen layout → click Cooking line | Recipes with planned minutes shown |
 
-All scenarios were run in the browser on the draft version and passed.
+Scenarios 1–11 were run in the browser on version 1.0 and passed.
