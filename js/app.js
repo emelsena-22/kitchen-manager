@@ -1,7 +1,7 @@
 // Kitchen Management Program – v1.0
 // Flow: purchase → stock → order (entered manually) → preparation (timed) → dish ready, stock deducted.
 
-const KEY = "kitchen-mgmt-v1";
+const KEY = "kitchen-mgmt-v2";
 let state = load();
 
 // ---------- persistence ----------

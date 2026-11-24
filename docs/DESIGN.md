@@ -93,8 +93,8 @@ with orders entered manually by kitchen staff.
 | 6 | Edit "Rice pilaf", change time to 28 min | Saved; step illustrations kept |
 | 7 | Staff guide → Upload photo on step 1 | Photo shown and kept after reload and after editing the recipe |
 | 8 | Staff guide → Video link with a YouTube URL | Video player shown for that step |
-| 9 | Dashboard with White cheese at 900 g (min 1000) | Listed with storage area, red badge |
-| 10 | Kitchen layout → click Refrigerator | Description and its ingredients shown; red "1" on the area for White cheese |
+| 9 | Dashboard at start (7 items at or below minimum, e.g. White cheese 900 g, min 1000) | All 7 listed with storage area; red badge "7" |
+| 10 | Kitchen layout → click Refrigerator | Description and its ingredients shown; red "3" on the area (White cheese, Lemon, Parsley are low) |
 | 11 | Kitchen layout → click Cooking line | Recipes with planned minutes shown |
 
 Scenarios 1–11 were run in the browser on version 1.0 and passed.

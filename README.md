@@ -25,7 +25,7 @@ Orders are entered into the kitchen manually.
 
 Or use the live version on GitHub Pages: https://emelsena-22.github.io/kitchen-manager/
 
-Data is saved in the browser's `localStorage`. Use **Reset demo data** to start over.
+Demo data: **82 ingredients** (dry storage, refrigerator, freezer; 7 of them start at or below their minimum level) and **44 recipes** (main dishes, soups, salads, pastries, breads and desserts), each with illustrated steps. Every ingredient is used in at least one recipe. Data is saved in the browser's `localStorage`. Use **Reset demo data** to start over.
 
 ## Project structure
 
