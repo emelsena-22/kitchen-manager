@@ -34,7 +34,7 @@ index.html        – page layout and navigation
 css/style.css     – styles
 js/data.js        – storage types, demo (seed) data, kitchen layout areas, survey link
 js/app.js         – application logic and views
-img/steps/        – step illustrations for the demo recipes
+img/steps/        – drawn step illustrations of the first three demo recipes (all other recipes get generated illustrations)
 docs/DESIGN.md    – program design document
 ```
 
